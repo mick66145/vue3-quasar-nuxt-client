@@ -1,21 +1,27 @@
 <template>
-  <header class="bg-white">
-    <nav class="flex items-center justify-between px-4">
-      <a href="#" class="p-1.5">
-        <span class="text-primary">{{ $t('g.system.system-name') }}</span>
-      </a>
-    </nav>
-  </header>
+  <q-header elevated class="bg-white text-blue-grey-7">
+    <q-toolbar>
+      <base-flat-button no-wrap class="q-ml-xs" to="/">
+        <q-toolbar-title shrink>
+          <span class="lt-sm:text-base">{{ $t('g.system.system-name') }}</span>
+        </q-toolbar-title>
+      </base-flat-button>
+      <q-space />
+    </q-toolbar>
+  </q-header>
 </template>
 
 <script>
 import { defineComponent } from 'vue-demi'
 export default defineComponent({
-  setup() {
+  components: {
+  },
+  setup () {
     return {
     }
   },
 })
 </script>
 
-<style lang="postcss" scoped></style>
+<style lang="postcss" scoped>
+</style>
