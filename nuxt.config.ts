@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-echarts',
     'nuxt-simple-sitemap',
+    'nuxt-quasar-ui'
   ],
   postcss: {
     plugins: {
@@ -83,5 +84,8 @@ export default defineNuxtConfig({
       { label: 'Priority', select: 'sitemap:priority', width: '12.5%' },
       { label: 'Hreflangs', select: 'count(xhtml:link)', width: '12.5%' }
     ],
+  },
+  quasar: {
+    sassVariables: './src/assets/styles/abstracts/quasar-variables.scss',
   }
 })
