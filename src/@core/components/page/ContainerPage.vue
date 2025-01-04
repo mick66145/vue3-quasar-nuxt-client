@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <q-page>
     <slot />
-  </div>
+  </q-page>
 </template>
 
 <script>
