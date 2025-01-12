@@ -13,6 +13,11 @@ export default defineNuxtConfig({
       extensions: ['vue'],
       pathPrefix: false
     },
+    {
+      path: '@/components',
+      extensions: ['vue'],
+      pathPrefix: false
+    },
   ],
   modules: [
     '@pinia/nuxt',
