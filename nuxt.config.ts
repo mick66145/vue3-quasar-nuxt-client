@@ -92,5 +92,8 @@ export default defineNuxtConfig({
   },
   quasar: {
     sassVariables: './src/assets/styles/abstracts/quasar-variables.scss',
-  }
+  },
+  devServer: {
+    port: 3000,
+  },
 })
