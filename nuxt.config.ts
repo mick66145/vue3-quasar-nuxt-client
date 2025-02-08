@@ -88,5 +88,8 @@ export default defineNuxtConfig({
       { label: 'Priority', select: 'sitemap:priority', width: '12.5%' },
       { label: 'Hreflangs', select: 'count(xhtml:link)', width: '12.5%' }
     ],
-  }
+  },
+  devServer: {
+    port: 3000,
+  },
 })
