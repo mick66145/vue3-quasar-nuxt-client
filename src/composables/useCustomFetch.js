@@ -1,15 +1,16 @@
-import { useFetch, useRuntimeConfig } from '#app'
 import { useUser } from '@/stores/user'
 import { getToken } from '@core/utils/auth'
+import useEnv from '@/composables/useEnv'
 import useNotify from '@/composables/useNotify'
 import useLogout from '@/composables/useLogout'
 
 export default function useCustomFetch() {
   const createFetchOptions = (options = {}) => {
+    const { VITE_BACKEND_HOST } = useEnv()
     const storeUser = useUser()
     // 基本配置
     const defaultOptions = {
-      baseURL: process.env.BACKEND_HOST,
+      baseURL: VITE_BACKEND_HOST,
       credentials: 'include',
       timeout: 600000,
       headers: {}
