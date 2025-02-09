@@ -16,7 +16,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/assets/styles/abstracts/quasar-variables";
-$container-padding: 20px;
+$container-xl-padding: 49px;
+$container-lg-padding: 29px;
+$container-md-padding: 1px;
+$container-sm-padding: 17px;
+$container-xs-padding: 5px;
 
 .container,
 .container-sm,
@@ -45,7 +49,7 @@ $container-padding: 20px;
 
   .container,
   .container-sm {
-    max-width: $breakpoint-xs - $container-padding;
+    max-width: $breakpoint-xs - $container-xs-padding;
   }
 }
 
@@ -54,7 +58,7 @@ $container-padding: 20px;
   .container,
   .container-sm,
   .container-md {
-    max-width: $breakpoint-sm - $container-padding;
+    max-width: $breakpoint-sm - $container-sm-padding;
   }
 }
 
@@ -64,7 +68,7 @@ $container-padding: 20px;
   .container-sm,
   .container-md,
   .container-lg {
-    max-width: $breakpoint-md - $container-padding;
+    max-width: $breakpoint-md - $container-md-padding;
   }
 }
 
@@ -75,7 +79,7 @@ $container-padding: 20px;
   .container-md,
   .container-lg,
   .container-xl {
-    max-width: $breakpoint-lg - $container-padding;
+    max-width: $breakpoint-lg - $container-lg-padding;
   }
 }
 
@@ -87,31 +91,7 @@ $container-padding: 20px;
   .container-lg,
   .container-xl,
   .container-2xl {
-    max-width: $breakpoint-xl - $container-padding;
-  }
-}
-
-@media screen and (width >=1600px) {
-
-  .container,
-  .container-sm,
-  .container-md,
-  .container-lg,
-  .container-xl,
-  .container-2xl {
-    max-width: 1560px;
-  }
-}
-
-@media screen and (width >=1800px) {
-
-  .container,
-  .container-sm,
-  .container-md,
-  .container-lg,
-  .container-xl,
-  .container-2xl {
-    max-width: 1850px;
+    max-width: $breakpoint-xl - $container-xl-padding;
   }
 }
 </style>
