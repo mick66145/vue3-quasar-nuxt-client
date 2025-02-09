@@ -1,6 +1,10 @@
 <template>
   <div>
-    This is front
+    <base-page>
+      <container-block class="container">
+        <h1>This is front</h1>
+      </container-block>
+    </base-page>
   </div>
 </template>
 

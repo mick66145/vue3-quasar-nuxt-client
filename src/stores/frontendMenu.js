@@ -29,7 +29,8 @@ export const useFrontendMenu = defineStore({
     getFrontendMenuList() {
       /* 如果有前台選單的api就使用以下註解 */
       // return new Promise((resolve, reject) => {
-      //   this.getFrontendMenuStore.list({})
+      //   const query = { orderby: 'sequence:asc,created_at:desc' }
+      //   this.getFrontendMenuStore.list({ query })
       //     .then(res => {
       //       const { list } = res
       //       this.frontendMenuList = list
