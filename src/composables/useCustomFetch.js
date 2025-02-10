@@ -49,16 +49,14 @@ export default function useCustomFetch() {
       return Promise.reject(error)
     }
 
-    // 處理網絡錯誤
     if (!window.navigator.onLine) {
       notifyAPIError({ message: '網絡有些問題。請重新加載' })
-    } else {
-      // maybe Program have some problem
-      return Promise.reject(error)
     }
+
+    return Promise.reject(error)
   }
 
-  const handleAuthError = async (error) => {
+  const handleAuthError = (error) => {
     if (error.statusCode !== 401) return Promise.reject(error)
 
     if (error.data?.code === 4010000) {
@@ -69,21 +67,25 @@ export default function useCustomFetch() {
   }
 
   const handleResponse = (response) => {
-    return Promise.resolve(response.data.value)
+    if (process.server) {
+      return Promise.resolve(response.data.value);
+    } else {
+      return Promise.resolve(response)
+    }
   }
 
   const fetchData = async (url, options = {}) => {
     try {
-      const response = await useFetch(url, createFetchOptions(options))
-
-      if (response.error.value) {
-        const error = response.error.value
-        await handleAuthError(error)
-        await handleError(error)
+      let response = null
+      if (process.server) {
+        response = await useFetch(url, createFetchOptions(options))
+      } else {
+        response = await $fetch(url, createFetchOptions(options))
       }
-
       return handleResponse(response)
     } catch (error) {
+      handleAuthError(error)
+      handleError(error)
       throw error
     }
   }
