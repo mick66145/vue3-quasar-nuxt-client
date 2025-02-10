@@ -87,12 +87,12 @@ export default function useServerDataTable({
   const setCallback = async () => {
     if (callback && callback instanceof Function) {
       const callObj = await callback({ search: { ...search.value } })
-      if (callObj instanceof Object) {
+      if (callObj && Array.isArray(callObj)) {
         const [res] = callObj
         if (res) {
           data.value = []
-          data.value = res.list
-          total.value = res.total
+          data.value = res.list || []
+          total.value = res.total || 0
         }
       }
     }
