@@ -9,9 +9,9 @@
         </base-flat-button>
         <!-- <q-space /> -->
         <div class="flex no-wrap items-center">
-          <base-flat-button size="1rem" color="blue-grey" v-for="menuItem in menu" :key="menuItem"
-            :label="menuItem.name">
-            <base-menu :options="menu.children" />
+          <base-flat-button size="1rem" color="blue-grey" v-for="menuItem in menu" :key="menuItem.id"
+            :label="menuItem.name" :to="menuItem.to">
+            <base-menu :options="menuItem.children" />
           </base-flat-button>
         </div>
       </q-toolbar>
@@ -33,7 +33,7 @@ export default defineComponent({
 
     // computed
     const menu = computed(() => {
-      return [].concat(frontendmenuStore.frontendMenuList)
+      return [].concat(frontendmenuStore.frontendMenuTree)
     })
 
     return {

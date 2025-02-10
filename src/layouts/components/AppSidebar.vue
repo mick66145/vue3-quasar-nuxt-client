@@ -32,7 +32,7 @@ export default defineComponent({
       },
     })
     const sidearOptions = computed(() => {
-      return [].concat(frontendmenuStore.frontendMenuList)
+      return [].concat(frontendmenuStore.frontendMenuTree)
     })
 
     return {
