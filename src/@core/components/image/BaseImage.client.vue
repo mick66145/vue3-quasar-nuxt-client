@@ -19,6 +19,7 @@
           載入失敗
         </div>
       </template>
+      <slot name="default" />
     </q-img>
     <skeleton-square v-if="isReading && useSkeleton" />
     <lightbox-dialog ref="dialog" :options="[{src:observeSrc,key:observeSrc,intro:alt}]" />
