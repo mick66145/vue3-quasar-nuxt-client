@@ -1,19 +1,8 @@
 <template>
   <span>
-    <q-img
-      v-show="!useSkeleton || (!isReading && useSkeleton)"
-      loading="lazy"
-      spinner-color="white"
-      :src="observeSrc"
-      :ratio="ratio"
-      :alt="alt"
-      :fit="fit"
-      :height="height"
-      :width="width"
-      :position="position"
-      :class="preview && 'cursor-pointer'"
-      @click="onPreview"
-    >
+    <q-img :class="observeClass" :style="observeStyle" v-show="!useSkeleton || (!isReading && useSkeleton)"
+      loading="lazy" spinner-color="white" :src="observeSrc" :ratio="ratio" :alt="alt" :fit="fit" :height="height"
+      :width="width" :position="position" @click="onPreview">
       <template #error>
         <div class="bg-dark flex flex-center text-white absolute-full">
           載入失敗
@@ -22,7 +11,7 @@
       <slot name="default" />
     </q-img>
     <skeleton-square v-if="isReading && useSkeleton" />
-    <lightbox-dialog ref="dialog" :options="[{src:observeSrc,key:observeSrc,intro:alt}]" />
+    <lightbox-dialog ref="dialog" :options="[{ src: observeSrc, key: observeSrc, intro: alt }]" />
   </span>
 </template>
 
@@ -39,17 +28,19 @@ export default defineComponent({
     fit: { type: String, default: 'cover' },
     height: { type: String, default: '100%' },
     width: { type: String, default: '100%' },
+    borderRadius: { type: String, },
     position: { type: String },
-    preview: { type: Boolean, default: true },
+    preview: { type: Boolean, default: false },
     useAuthorization: { type: Boolean, default: false },
     headers: { type: Object },
     fileReaderMethod: { type: String, default: 'text' },
     useSkeleton: { type: Boolean, default: false },
   },
-  setup (props) {
+  setup(props) {
     // data
     const dialog = ref()
     const isReading = ref(false)
+    const { borderRadius } = toRefs(props)
 
     // computed
     const observeSrc = asyncComputed(
@@ -73,16 +64,24 @@ export default defineComponent({
       },
       null,
     )
+    const observeClass = computed(() => ({
+      'cursor-pointer': props.preview
+    }))
+    const observeStyle = computed(() => ({
+      borderRadius: borderRadius.value ? `${borderRadius.value}` : undefined
+    }))
 
     const onPreview = () => {
       if (props.preview) {
-        dialog.value.showDialog({ })
+        dialog.value.showDialog({})
       }
     }
     return {
       dialog,
       isReading,
       observeSrc,
+      observeClass,
+      observeStyle,
       onPreview,
     }
   },
@@ -90,4 +89,3 @@ export default defineComponent({
 </script>
 
 <style lang="postcss" scoped></style>
-@core/utils/auth
