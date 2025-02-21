@@ -8,17 +8,30 @@ export const navigationProps = {
   target: String,
 }
 
-export default function useNavigation ({
-  to,
-  replace,
-  href,
-  target,
+export default function useNavigation({
+  to = null,
+  replace = false,
+  href = null,
+  target = '_slef',
 }) {
   // data
   const router = useRouter()
 
+  // methods
   const onNavigation = () => {
-    if (href) { window.open(href, target) } else { router[replace ? 'replace' : 'push'](to) }
+
+    const navigationObj = {
+      url: toValue(href),
+      target: toValue(target),
+      to: toValue(to),
+      replace: toValue(replace),
+    }
+
+    if (navigationObj.href) {
+      window.open(navigationObj.href, navigationObj.target)
+    } else {
+      router[navigationObj.replace ? 'replace' : 'push'](navigationObj.to)
+    }
   }
 
   return {
