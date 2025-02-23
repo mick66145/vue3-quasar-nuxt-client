@@ -6,6 +6,7 @@
     :loading="isLoading"
     :size="size"
     :label="label"
+    :disable="observeDisable"
   >
     <slot name="default" />
     <template #loading>
@@ -25,17 +26,23 @@ export default defineComponent({
     flat: { type: Boolean, default: true },
     size: { type: String, default: 'md' },
     useLoading: { type: Boolean, default: false },
+    disable: { type: Boolean, default: false },
   },
   setup (props) {
     // data
     const storeApp = useApp()
 
+    // computed
     const isLoading = computed(() => {
-      return props.useLoading && (storeApp.isCreate || storeApp.isUpdate || storeApp.isDelete)
+      return props.useLoading && (storeApp.isCreate || storeApp.isUpdate || storeApp.isDelete || storeApp.isSubmit || false)
+    })
+    const observeDisable = computed(() => {
+      return props.disable || (storeApp.isCreate || storeApp.isUpdate || storeApp.isDelete || storeApp.isSubmit)
     })
 
     return {
       isLoading,
+      observeDisable,
     }
   },
 })

@@ -25,7 +25,7 @@ import { useApp } from '@/stores/app'
 
 export default defineComponent({
   props: {
-    label: { type: String, default: '' },
+    label: { type: String },
     color: { type: String, default: 'primary' },
     icon: { type: String },
     unelevated: { type: Boolean, default: false },
@@ -35,14 +35,14 @@ export default defineComponent({
     useLoading: { type: Boolean, default: true },
     disable: { type: Boolean, default: false },
   },
-  setup (props) {
+  setup(props) {
     // data
     const storeApp = useApp()
 
+    // computed
     const isLoading = computed(() => {
-      return props.useLoading && (storeApp.isCreate || storeApp.isUpdate || storeApp.isDelete || storeApp.isSubmit)
+      return props.useLoading && (storeApp.isCreate || storeApp.isUpdate || storeApp.isDelete || storeApp.isSubmit || false)
     })
-
     const observeDisable = computed(() => {
       return props.disable || (storeApp.isCreate || storeApp.isUpdate || storeApp.isDelete || storeApp.isSubmit)
     })
@@ -55,6 +55,4 @@ export default defineComponent({
 })
 </script>
 
-<style lang="postcss" scoped>
-
-</style>
+<style lang="postcss" scoped></style>
