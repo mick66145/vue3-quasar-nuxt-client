@@ -5,6 +5,7 @@ import { fileURLToPath, URL } from 'url'
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  ssr: true,
   srcDir: 'src/',
   css: ['./assets/styles/index.scss'],
   components: [
@@ -27,6 +28,7 @@ export default defineNuxtConfig({
     "nuxt-lodash",
     'nuxt-swiper',
     '@nuxtjs/i18n',
+    '@nuxt/image',
     "@nuxtjs/tailwindcss",
     '@nuxtjs/color-mode',
     'nuxt-echarts',
@@ -92,6 +94,47 @@ export default defineNuxtConfig({
   },
   quasar: {
     sassVariables: './src/assets/styles/abstracts/quasar-variables.scss',
+  },
+  swiper: {
+    modules: [
+      "virtual",
+      "keyboard",
+      "mousewheel",
+      "navigation",
+      "pagination",
+      "scrollbar",
+      "parallax",
+      "free-mode",
+      "grid",
+      "manipulation",
+      "zoom",
+      "controller",
+      "a11y",
+      "history",
+      "hash-navigation",
+      "autoplay",
+      "effect-fade",
+      "effect-cube",
+      "effect-flip",
+      "effect-coverflow",
+      "effect-cards",
+      "effect-creative",
+      "thumbs",
+    ]
+  },
+  image: {
+    quality: 80,
+    screens: {
+      xs: 0,
+      sm: 576,
+      md: 768,
+      lg: 992,
+      xl: 1200,
+      xxl: 1400,
+      xxxl: 1920,
+    },
+    domains: ['http://localhost:3000'],
+    densities: [1, 2, 3, 4],
   },
   devServer: {
     port: 3000,

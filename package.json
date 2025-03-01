@@ -13,12 +13,16 @@
     "build:beta": "nuxt build --dotenv .env.beta",
     "build:production": "nuxt build --dotenv .env.production",
     "generate": "nuxt generate",
+    "generate:dev": "nuxt generate --dotenv .env.dev",
+    "generate:beta": "nuxt generate --dotenv .env.beta",
+    "generate:production": "nuxt generate --dotenv .env.production",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
+    "@nuxt/image": "^1.9.0",
     "@nuxtjs/i18n": "^8.3.3",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "autoprefixer": "^10.4.19",
