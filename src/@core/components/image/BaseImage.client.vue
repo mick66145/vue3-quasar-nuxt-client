@@ -12,8 +12,10 @@
               載入失敗
             </div>
           </template>
-          <slot name="default" />
         </nuxt-img>
+      </div>
+      <div class="q-img__content absolute-full q-anchor--skip" v-if="$slots.default">
+        <slot name="default" />
       </div>
     </div>
     <skeleton-square v-if="isReading && useSkeleton" />
