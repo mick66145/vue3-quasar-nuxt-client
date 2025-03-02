@@ -4,9 +4,10 @@
       <div style="padding-bottom: 75%;"></div>
       <div class="q-img__container absolute-full">
         <nuxt-img class="q-img__image q-img__image--with-transition q-img__image--loaded" :class="observeClass"
-          :style="observeStyle" v-show="!useSkeleton || (!isReading && useSkeleton)" loading="lazy" :src="observeSrc"
-          :alt="alt" :fit="fit" :height="height" :width="width" :position="position" :modifiers="{ aspectRatio: ratio }"
-          :format="format" :preload="preload" :sizes="sizes" @click="onPreview">
+          :style="observeStyle" v-show="!useSkeleton || (!isReading && useSkeleton)" loading="eager" :src="observeSrc"
+          :alt="alt" :fit="fit" :height="height" :width="width" :preload="preload" :position="position"
+          :fetchpriority="fetchpriority" :modifiers="{ aspectRatio: ratio }" :format="format" :sizes="sizes"
+          @click="onPreview">
           <template #error>
             <div class="bg-dark flex flex-center text-white absolute-full">
               載入失敗
@@ -38,7 +39,9 @@ export default defineComponent({
     width: { type: String, default: '100%' },
     borderRadius: { type: String },
     format: { type: String, default: 'format' },
-    preload: { type: Boolean, default: true },
+    preload: { type: Boolean, default: false },
+    loading: { type: String },
+    fetchpriority: { type: String },
     sizes: { type: String, default: 'sm:100vw' },
     position: { type: String },
     preview: { type: Boolean, default: false },
