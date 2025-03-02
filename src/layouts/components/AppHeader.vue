@@ -1,5 +1,5 @@
 <template>
-  <q-header elevated class="bg-white text-blue-grey-7">
+  <q-header class="bg-white text-blue-grey-7">
     <container-block class="container">
       <q-toolbar class="p-0">
         <base-flat-button class="pl-0" no-wrap to="/">

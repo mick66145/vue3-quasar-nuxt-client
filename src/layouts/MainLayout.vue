@@ -1,9 +1,9 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <app-header class="md:block lt-md:hidden" />
-    <mobile-header class="md:hidden lt-md:block" />
+    <app-header class="xl:block lt-xl:hidden" />
+    <mobile-header class="xl:hidden lt-xl:block" />
     <app-sidebar v-if="!isScreenLargerMd" />
-    <q-page-container class="bg-grey-1 !pt-[50px]">
+    <q-page-container class="bg-grey-1">
       <nuxt-page />
     </q-page-container>
     <app-footer />
@@ -26,7 +26,7 @@ export default defineComponent({
   setup() {
     // use
     const { isScreenLargerMd } = useScreen()
-
+    
     return {
       isScreenLargerMd,
     }
