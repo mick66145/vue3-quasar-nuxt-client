@@ -3,7 +3,7 @@
     <app-header class="xl:block lt-xl:hidden" />
     <mobile-header class="xl:hidden lt-xl:block" />
     <app-sidebar v-if="!isScreenLargerMd" />
-    <q-page-container class="bg-grey-1">
+    <q-page-container class="bg-grey-1 !pt-[50px]">
       <nuxt-page />
     </q-page-container>
     <app-footer />
@@ -26,7 +26,7 @@ export default defineComponent({
   setup() {
     // use
     const { isScreenLargerMd } = useScreen()
-    
+
     return {
       isScreenLargerMd,
     }
