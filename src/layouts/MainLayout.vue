@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <app-header class="xl:block lt-xl:hidden" />
     <mobile-header class="xl:hidden lt-xl:block" />
-    <app-sidebar v-if="!isScreenLargerMd" />
+    <app-sidebar class="xl:hidden lt-xl:block" overlay :breakpoint="1200" />
     <q-page-container class="bg-grey-1 !pt-[50px]">
       <nuxt-page />
     </q-page-container>
@@ -14,7 +14,6 @@
 <script>
 import { AppHeader, MobileHeader, AppSidebar, AppFooter } from './components'
 import { defineComponent } from 'vue-demi'
-import useScreen from '@/composables/useScreen'
 
 export default defineComponent({
   components: {
@@ -24,11 +23,7 @@ export default defineComponent({
     AppFooter,
   },
   setup() {
-    // use
-    const { isScreenLargerMd } = useScreen()
-
     return {
-      isScreenLargerMd,
     }
   },
 })
