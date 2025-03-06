@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <app-header class="xl:block lt-xl:hidden" />
     <mobile-header class="xl:hidden lt-xl:block" />
-    <app-sidebar class="xl:hidden lt-xl:block" overlay :breakpoint="1200" />
+    <app-sidebar class="xl:hidden lt-xl:block" v-if="$q.screen.width < 1200" overlay :breakpoint="1200" />
     <q-page-container class="bg-grey-1 !pt-[50px]">
       <nuxt-page />
     </q-page-container>
