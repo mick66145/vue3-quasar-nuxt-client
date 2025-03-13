@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router'
 import { useUser } from '@/stores/user'
 import useLine from '@/composables/useLine'
 import useGoogle from '@/composables/useGoogle'
+import useFacebook from '@/composables/useFacebook'
 import useLoading from '@/composables/useLoading'
 import useCRUD from '@/composables/useCRUD'
 
@@ -48,6 +49,10 @@ export default defineComponent({
           const { isRedirect } = useGoogle({})
           return { isRedirect }
         }
+        case 'facebook': {
+          const { isRedirect } = useFacebook({})
+          return { isRedirect }
+        }
       }
     }
     const handleGetToken = async () => {
@@ -60,6 +65,11 @@ export default defineComponent({
           }
           case 'google': {
             const { oauth2Token } = useGoogle({})
+            const { accessToken, idToken } = await oauth2Token()
+            return { accessToken, idToken }
+          }
+          case 'facebook': {
+            const { oauth2Token } = useFacebook({})
             const { accessToken, idToken } = await oauth2Token()
             return { accessToken, idToken }
           }
