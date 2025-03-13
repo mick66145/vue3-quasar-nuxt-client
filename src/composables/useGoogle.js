@@ -1,10 +1,11 @@
 import { ref, computed } from 'vue-demi'
-import request from '@core/utils/request'
 
-export default function useGoogle ({
-  channelId = process.env.GOOGLE_CLIENT_ID,
-  channelSecret = process.env.GOOGLE_CLIENT_SECRET,
-  redirectUri = process.env.GOOGLE_REDIRECT_URI,
+const { VITE_GOOGLE_CLIENT_ID, VITE_GOOGLE_CLIENT_SECRET, VITE_GOOGLE_REDIRECT_URI, } = useEnv()
+console.log(VITE_GOOGLE_CLIENT_ID, VITE_GOOGLE_CLIENT_SECRET, VITE_GOOGLE_REDIRECT_URI)
+export default function useGoogle({
+  channelId = VITE_GOOGLE_CLIENT_ID,
+  channelSecret = VITE_GOOGLE_CLIENT_SECRET,
+  redirectUri = VITE_GOOGLE_REDIRECT_URI,
   scope = 'profile+email',
 }) {
   // data
@@ -24,24 +25,25 @@ export default function useGoogle ({
 
   const oauth2Token = async () => {
     const code = urlParams.value.get('code')
+    const { fetch } = useCustomFetch()
+
     if (code) {
       try {
-        const response = await request({
-          url: 'https://oauth2.googleapis.com/token',
-          method: 'post',
-          withCredentials: false,
+        const response = await fetch('https://oauth2.googleapis.com/token', {
+          method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          data: {
+          credentials: 'omit',
+          body: new URLSearchParams({
             grant_type: 'authorization_code',
             code: code,
             client_id: channelId,
             client_secret: channelSecret,
             redirect_uri: redirectUri,
-          },
+          })
         })
-        const { access_token: accessToken, id_token: idToken } = response.data
+        const { access_token: accessToken, id_token: idToken } = response
         return { accessToken, idToken }
-      } catch (error) {}
+      } catch (error) { }
     }
   }
 
