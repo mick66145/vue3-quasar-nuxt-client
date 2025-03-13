@@ -10,18 +10,19 @@
 
 <script>
 import { defineComponent, computed, onMounted, toRefs } from 'vue-demi'
-import Configuration from '@/configuration'
 import useGoogle from '@/composables/useGoogle'
 import useLoading from '@/composables/useLoading'
+
+const { VITE_GOOGLE_CLIENT_ID, VITE_GOOGLE_CLIENT_SECRET, VITE_GOOGLE_REDIRECT_URI, } = useEnv()
 
 export default defineComponent({
   props: {
     label: { type: String },
     outline: { type: Boolean, default: false },
     rounded: { type: Boolean, default: false },
-    channelId: { type: String, default: Configuration('googleClientId') },
-    channelSecret: { type: String, default: Configuration('googleClientSecret') },
-    redirectUri: { type: String, default: Configuration('googleRedirectUri') },
+    channelId: { type: String, default: VITE_GOOGLE_CLIENT_ID },
+    channelSecret: { type: String, default: VITE_GOOGLE_CLIENT_SECRET },
+    redirectUri: { type: String, default: VITE_GOOGLE_REDIRECT_URI },
     scope: { type: String, default: 'profile openid email' },
     useIconStyle: { type: Boolean, default: false },
     action: { type: String, default: 'oauth2' }, // oauth2,share

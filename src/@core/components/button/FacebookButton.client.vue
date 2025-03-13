@@ -11,18 +11,19 @@
 <script>
 import { defineComponent, computed, onMounted } from 'vue-demi'
 import { toReactive } from '@vueuse/core'
-import Configuration from '@/configuration'
 import useFacebook from '@/composables/useFacebook'
 import useLoading from '@/composables/useLoading'
+
+const { VITE_FACEBOOK_CLIENT_ID, VITE_FACEBOOK_CLIENT_SECRET, VITE_FACEBOOK_REDIRECT_URI, } = useEnv()
 
 export default defineComponent({
   props: {
     label: { type: String },
     outline: { type: Boolean, default: false },
     rounded: { type: Boolean, default: false },
-    channelId: { type: String, default: Configuration('facebookClientId') },
-    channelSecret: { type: String, default: Configuration('facebookClientSecret') },
-    redirectUri: { type: String, default: Configuration('facebookRedirectUri') },
+    channelId: { type: String, default: VITE_FACEBOOK_CLIENT_ID },
+    channelSecret: { type: String, default: VITE_FACEBOOK_CLIENT_SECRET },
+    redirectUri: { type: String, default: VITE_FACEBOOK_REDIRECT_URI },
     scope: { type: String, default: 'profile openid email' },
     useIconStyle: { type: Boolean, default: false },
     action: { type: String, default: 'oauth2' }, // oauth2,share
