@@ -1,0 +1,43 @@
+# 讓使用者可在 build 時指定環境
+ARG NODE_VERSION=18
+ARG NUXT_ENV=production  # 預設為 production
+
+# Build Stage
+FROM node:${NODE_VERSION}-alpine AS build-stage
+# FROM --platform=linux/amd64 node:${NODE_VERSION}-alpine AS build-stage
+WORKDIR /app
+
+# 讓 ARG 變數傳遞到 ENV，確保在 build 階段可以使用
+ARG NUXT_ENV
+ENV NUXT_ENV=${NUXT_ENV}
+
+# 複製 package.json 並安裝依賴
+COPY package.json ./
+RUN yarn install
+
+# 複製專案所有文件
+COPY . .
+
+# 根據環境選擇 .env 檔案，確保 build 使用正確的環境
+RUN cp .env.${NUXT_ENV} .env
+
+# Nuxt 3: 產生 .output
+RUN yarn build
+
+# Production Stage
+FROM node:${NODE_VERSION}-alpine AS runtime-stage
+# FROM --platform=linux/amd64 node:${NODE_VERSION}-alpine AS runtime-stage
+WORKDIR /app
+
+# 設定環境變數
+ENV HOST=0.0.0.0
+ENV PORT=3000
+ENV NUXT_ENV=${NUXT_ENV}
+
+# 複製 build-stage 產生的文件
+COPY --from=build-stage /app ./
+
+EXPOSE 3000
+
+# 確保執行時使用正確的環境變數
+CMD ["node", ".output/server/index.mjs"]
