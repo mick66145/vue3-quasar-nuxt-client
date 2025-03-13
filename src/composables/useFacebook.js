@@ -1,10 +1,11 @@
 import { ref, computed } from 'vue-demi'
-import request from '@core/utils/request'
+
+const { VITE_FACEBOOK_CLIENT_ID, VITE_FACEBOOK_CLIENT_SECRET, VITE_FACEBOOK_REDIRECT_URI, } = useEnv()
 
 export default function useFacebook({
-  channelId = process.env.FACEBOOK_CLIENT_ID,
-  channelSecret = process.env.FACEBOOK_CLIENT_SECRET,
-  redirectUri = process.env.FACEBOOK_REDIRECT_URI,
+  channelId = VITE_FACEBOOK_CLIENT_ID,
+  channelSecret = VITE_FACEBOOK_CLIENT_SECRET,
+  redirectUri = VITE_FACEBOOK_REDIRECT_URI,
   scope = 'profile+email',
 }) {
   // data
@@ -24,21 +25,22 @@ export default function useFacebook({
 
   const oauth2Token = async () => {
     const code = urlParams.value.get('code')
+    const { fetch } = useCustomFetch()
+
     if (code) {
       try {
-        const response = await request({
-          url: 'https://graph.facebook.com/v19.0/oauth/access_token',
-          method: 'post',
-          withCredentials: false,
+        const response = await fetch('https://graph.facebook.com/v19.0/oauth/access_token', {
+          method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          data: {
+          credentials: 'omit',
+          body: new URLSearchParams({
             code: code,
             client_id: channelId,
             client_secret: channelSecret,
             redirect_uri: redirectUri,
-          },
+          })
         })
-        const { access_token: accessToken, id_token: idToken } = response.data
+        const { access_token: accessToken, id_token: idToken } = response
         return { accessToken, idToken }
       } catch (error) { }
     }
