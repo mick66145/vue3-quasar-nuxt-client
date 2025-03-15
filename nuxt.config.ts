@@ -95,33 +95,6 @@ export default defineNuxtConfig({
   quasar: {
     sassVariables: './src/assets/styles/abstracts/quasar-variables.scss',
   },
-  swiper: {
-    modules: [
-      "virtual",
-      "keyboard",
-      "mousewheel",
-      "navigation",
-      "pagination",
-      "scrollbar",
-      "parallax",
-      "free-mode",
-      "grid",
-      "manipulation",
-      "zoom",
-      "controller",
-      "a11y",
-      "history",
-      "hash-navigation",
-      "autoplay",
-      "effect-fade",
-      "effect-cube",
-      "effect-flip",
-      "effect-coverflow",
-      "effect-cards",
-      "effect-creative",
-      "thumbs",
-    ]
-  },
   image: {
     quality: 80,
     screens: {

@@ -139,6 +139,9 @@ import FixedFooter from './FixedFooter.vue'
 import MobelFixedFooter from './MobelFixedFooter.vue'
 import InfiniteScroll from './infinite-scroll/InfiniteScroll.vue'
 import InfiniteScrollReverse from './infinite-scroll/InfiniteScrollReverse.vue'
+import BaseSwiper from './swiper/BaseSwiper.vue'
+import CoverflowSwiper from './swiper/CoverflowSwiper.vue'
+import CardSwiper from './swiper/CardSwiper.vue'
 import ContainerPage from './page/ContainerPage.vue'
 import ContainerBlock from './block/ContainerBlock.vue'
 import BaseMenu from './menu/BaseMenu.vue'
@@ -294,6 +297,9 @@ export default {
     app.component('MobelFixedFooter', MobelFixedFooter)
     app.component('InfiniteScroll', InfiniteScroll)
     app.component('InfiniteScrollReverse', InfiniteScrollReverse)
+    app.component('BaseSwiper', BaseSwiper)
+    app.component('CoverflowSwiper', CoverflowSwiper)
+    app.component('CardSwiper', CardSwiper)
     app.component('ContainerPage', ContainerPage)
     app.component('ContainerBlock', ContainerBlock)
     app.component('BaseMenu', BaseMenu)
