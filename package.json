@@ -52,7 +52,7 @@
     "nuxt": "3.14.1592",
     "nuxt-lodash": "^2.5.3",
     "nuxt-simple-sitemap": "^4.4.1",
-    "nuxt-swiper": "^1.2.2",
+    "nuxt-swiper": "^1.2.5",
     "pinia": "^2.3.0",
     "pinia-plugin-persistedstate": "^4.2.0",
     "qs": "^6.11.0",

@@ -91,33 +91,6 @@ export default defineNuxtConfig({
       { label: 'Hreflangs', select: 'count(xhtml:link)', width: '12.5%' }
     ],
   },
-  swiper: {
-    modules: [
-      "virtual",
-      "keyboard",
-      "mousewheel",
-      "navigation",
-      "pagination",
-      "scrollbar",
-      "parallax",
-      "free-mode",
-      "grid",
-      "manipulation",
-      "zoom",
-      "controller",
-      "a11y",
-      "history",
-      "hash-navigation",
-      "autoplay",
-      "effect-fade",
-      "effect-cube",
-      "effect-flip",
-      "effect-coverflow",
-      "effect-cards",
-      "effect-creative",
-      "thumbs",
-    ]
-  },
   image: {
     quality: 80,
     screens: {
