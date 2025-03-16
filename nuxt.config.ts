@@ -33,6 +33,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-echarts',
     'nuxt-simple-sitemap',
+    '@vite-pwa/nuxt',
   ],
   postcss: {
     plugins: {
@@ -104,6 +105,53 @@ export default defineNuxtConfig({
     },
     domains: ['http://localhost:3000'],
     densities: [1, 2, 3, 4],
+  },
+  pwa: {
+    includeAssets: ['favicon.ico'],
+    injectRegister: 'auto',
+    manifest: {
+      name: 'ClientFrontend-Base-App', // 應用程式名稱
+      short_name: 'ClientFrontend-Base', // 應用程式簡稱
+      start_url: '/',
+      display: 'standalone', // 顯示模式
+      background_color: '#ffffff', // 背景顏色
+      theme_color: '#000000', // 主題顏色
+      icons: [
+        {
+          src: 'pwa-192x192.png',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+        {
+          src: '/pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+        },
+      ],
+    },
+    registerType: 'autoUpdate',
+    workbox: {
+      cleanupOutdatedCaches: true, // 清理舊的快取
+      skipWaiting: true, // 當新 Service Worker 可用時立即接管
+      clientsClaim: true, // 立即控制所有打開的客戶端
+      sourcemap: true, // 生成 sourcemap
+      runtimeCaching: [
+        {
+          urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts靜態資源保存
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'js-css-cache',
+          },
+        },
+        {
+          urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 圖片存檔
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'image-cache',
+          },
+        },
+      ],
+    },
   },
   devServer: {
     port: 3000,
