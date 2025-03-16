@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import { fileURLToPath, URL } from 'url'
+import { resolve } from 'path'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -155,5 +156,13 @@ export default defineNuxtConfig({
   },
   devServer: {
     port: 3000,
+  },
+  nitro: {
+    publicAssets: [
+      {
+        dir: resolve(__dirname, 'public'),
+        baseURL: '/',  
+      },
+    ],
   },
 })
